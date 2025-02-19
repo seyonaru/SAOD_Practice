@@ -94,12 +94,12 @@ void BubbleSort(int A[], int N) {
             }
         }
     }
-    cout << "\nC: " << C << ", M: " << M << "\n";
+    cout << "\nC: " << C << ", M: " << M;
 }
 
 int main() {
     srand(time(0));
-    const int n = 10;
+    const int n = 500;
     int A[n];
     FillInc(A, n);
     PrintMas(A, n);
