@@ -79,6 +79,24 @@ void OptimizedSelectSort(int A[], int N) {
     cout << "\nC: " << C << ", M: " << M << ", C + M = " << C + M;
 }
 
+//Метод BubbleSort
+void BubbleSort(int A[], int N) {
+    int i; // index for iteration
+    int j; // index for right element in current pair
+    int C = 0;
+    int M = 0;
+    for (i = 0; i < N - 2; i++) {
+        for (j = N; j > i; j--) {
+            C++;
+            if (A[j] < A[j - 1]) {
+                M += 3;
+                swap(A[j], A[j - 1]);
+            }
+        }
+    }
+    cout << "\nC: " << C << ", M: " << M << "\n";
+}
+
 int main() {
     srand(time(0));
     const int n = 100;
@@ -133,5 +151,5 @@ int main() {
     //cout << "\nSorted random massive with optimisation: ";
     //PrintMas(A3, n);
 
-
+    //BubbsleSort
 }  
