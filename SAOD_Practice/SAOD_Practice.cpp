@@ -151,5 +151,14 @@ int main() {
     //cout << "\nSorted random massive with optimisation: ";
     //PrintMas(A3, n);
 
-    //BubbsleSort
+    //BubbleSort
+    BubbleSort(A2, n);
+    cout << "\nSorted descending massive with optimisation: ";
+    PrintMas(A2, n);
+    BubbleSort(A, n);
+    cout << "\nSorted ascending massive with optimisation: ";
+    PrintMas(A, n);
+    BubbleSort(A3, n);
+    cout << "\nSorted random massive with optimisation: ";
+    PrintMas(A3, n);
 }  
