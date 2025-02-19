@@ -9,13 +9,11 @@ void FillInc(int A[], int N) {
         A[i] = i + 1;
     }
 }
-
 void FillDec(int A[], int N) {
     for (int i = 0; i < N; i++) {
         A[i] = N - i;
     }
 }
-
 void FillRand(int A[], int N) {
     for (int i = 0; i < N; i++) {
         A[i] = rand() % 100; 
@@ -28,7 +26,6 @@ int CheckSum(int A[], int N) {
     }
     return sum;
 }
-
 int RunNumber(int A[], int N) {
     int runCount = 1;
     int rowCount = 0;
@@ -41,7 +38,6 @@ int RunNumber(int A[], int N) {
     }
     return runCount;
 }
-
 void PrintMas(int A[], int N) {
     cout << "[ ";
     for (int i = 0; i < N; i++){
