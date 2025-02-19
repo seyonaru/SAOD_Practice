@@ -86,7 +86,7 @@ void BubbleSort(int A[], int N) {
     int C = 0;
     int M = 0;
     for (i = 0; i < N - 2; i++) {
-        for (j = N; j > i; j--) {
+        for (j = N-1; j > i; j--) {
             C++;
             if (A[j] < A[j - 1]) {
                 M += 3;
@@ -99,7 +99,7 @@ void BubbleSort(int A[], int N) {
 
 int main() {
     srand(time(0));
-    const int n = 100;
+    const int n = 10;
     int A[n];
     FillInc(A, n);
     PrintMas(A, n);
@@ -124,7 +124,7 @@ int main() {
     //cout << "\nSorted descending massive: ";
     //PrintMas(A2, n);
     //SelectSort(A, n);
-    //cout << "\nSorted ascending masseive: ";
+    //cout << "\nSorted ascending massive: ";
     //PrintMas(A, n);
     //SelectSort(A3, n);
     //cout << "\nSorted random massive: ";
