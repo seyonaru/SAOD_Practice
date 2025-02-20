@@ -97,9 +97,39 @@ void BubbleSort(int A[], int N) {
     cout << "\nC: " << C << ", M: " << M;
 }
 
+//ShakerSort
+void ShakerSort(int A[], int N) {
+    int L = 1;
+    int R = N - 1;
+    int C = 0;
+    int M = 0;
+    int k = N;
+    while (L < R) {
+        for (int j = R; j > L - 1; j--) {
+            C++;
+            if (A[j] < A[j - 1]) {
+                M += 3;
+                swap(A[j], A[j - 1]);
+                k = j;
+            }
+        }
+        L = k;
+        for (int j = L; j < R; j++) {
+            C++;
+            if (A[j] > A[j + 1]) {
+                M += 3;
+                swap(A[j], A[j + 1]);
+                k = j;
+            }
+        }
+        R = k;
+    }
+    cout << "\nC: " << C << ", M: " << M << ", C + M = " << C + M << "\n";
+}
+
 int main() {
     srand(time(0));
-    const int n = 500;
+    const int n = 10;
     int A[n];
     FillInc(A, n);
     PrintMas(A, n);
@@ -152,13 +182,34 @@ int main() {
     //PrintMas(A3, n);
 
     //BubbleSort
-    BubbleSort(A2, n);
+    //BubbleSort(A2, n);
+    //cout << "\nSorted descending massive with optimisation: ";
+    //PrintMas(A2, n);
+    //BubbleSort(A, n);
+    //cout << "\nSorted ascending massive with optimisation: ";
+    //PrintMas(A, n);
+    //BubbleSort(A3, n);
+    //cout << "\nSorted random massive with optimisation: ";
+    //PrintMas(A3, n);
+
+    //ShakerSort
+    ShakerSort(A2, n);
     cout << "\nSorted descending massive with optimisation: ";
     PrintMas(A2, n);
-    BubbleSort(A, n);
+    int sum1 = CheckSum(A2, n);
+    int run1 = RunNumber(A2, n);
+    cout << "Sum: " << sum1 << ", Run: " << run1 << "\n";
+    ShakerSort(A, n);
     cout << "\nSorted ascending massive with optimisation: ";
     PrintMas(A, n);
-    BubbleSort(A3, n);
+    int sum4 = CheckSum(A, n);
+    int run4 = RunNumber(A, n);
+    cout << "Sum: " << sum4 << ", Run: " << run4 << "\n";
+    ShakerSort(A3, n);
     cout << "\nSorted random massive with optimisation: ";
     PrintMas(A3, n);
+    int sum5 = CheckSum(A3, n);
+    int run5 = RunNumber(A3, n);
+    cout << "Sum: " << sum5 << ", Run: " << run5 << "\n";
+
 }  
