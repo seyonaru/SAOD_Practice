@@ -85,7 +85,7 @@ void BubbleSort(int A[], int N) {
     int j; // index for right element in current pair
     int C = 0;
     int M = 0;
-    for (i = 0; i < N - 2; i++) {
+    for (i = 0; i < N - 1; i++) {
         for (j = N-1; j > i; j--) {
             C++;
             if (A[j] < A[j - 1]) {
@@ -94,7 +94,7 @@ void BubbleSort(int A[], int N) {
             }
         }
     }
-    cout << "\nC: " << C << ", M: " << M;
+    cout << "\nC: " << C << ", M: " << M << ", C + M = " << C + M;
 }
 
 //ShakerSort
@@ -139,8 +139,8 @@ int main() {
     int A2[n];
     FillDec(A2, n);
     PrintMas(A2, n);
-    int sum2 = CheckSum(A, n);
-    int run2 = RunNumber(A, n);
+    int sum2 = CheckSum(A2, n);
+    int run2 = RunNumber(A2, n);
     cout << "Sum: " << sum2 << ", Run: " << run2 << "\n";
     int A3[n];
     FillRand(A3, n);
@@ -211,5 +211,4 @@ int main() {
     int sum5 = CheckSum(A3, n);
     int run5 = RunNumber(A3, n);
     cout << "Sum: " << sum5 << ", Run: " << run5 << "\n";
-
 }  
