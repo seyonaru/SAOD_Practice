@@ -85,7 +85,7 @@ void BubbleSort(int A[], int N) {
     int j; // index for right element in current pair
     int C = 0;
     int M = 0;
-    for (i = 0; i < N - 2; i++) {
+    for (i = 0; i < N - 1; i++) {
         for (j = N-1; j > i; j--) {
             C++;
             if (A[j] < A[j - 1]) {
@@ -94,10 +94,10 @@ void BubbleSort(int A[], int N) {
             }
         }
     }
-    cout << "\nC: " << C << ", M: " << M;
+    cout << "\nC: " << C << ", M: " << M << ", C + M = " << C + M;
 }
 
-int main() {
+int main() {    
     srand(time(0));
     const int n = 500;
     int A[n];
@@ -109,8 +109,8 @@ int main() {
     int A2[n];
     FillDec(A2, n);
     PrintMas(A2, n);
-    int sum2 = CheckSum(A, n);
-    int run2 = RunNumber(A, n);
+    int sum2 = CheckSum(A2, n);
+    int run2 = RunNumber(A2, n);
     cout << "Sum: " << sum2 << ", Run: " << run2 << "\n";
     int A3[n];
     FillRand(A3, n);
@@ -155,10 +155,19 @@ int main() {
     BubbleSort(A2, n);
     cout << "\nSorted descending massive with optimisation: ";
     PrintMas(A2, n);
+    int sum1 = CheckSum(A2, n);
+    int run1 = RunNumber(A2, n);
+    cout << "Sum: " << sum1 << ", Run: " << run1 << "\n";
     BubbleSort(A, n);
     cout << "\nSorted ascending massive with optimisation: ";
     PrintMas(A, n);
+    int sum4 = CheckSum(A, n);
+    int run4 = RunNumber(A, n);
+    cout << "Sum: " << sum4 << ", Run: " << run4 << "\n";
     BubbleSort(A3, n);
     cout << "\nSorted random massive with optimisation: ";
     PrintMas(A3, n);
+    int sum5 = CheckSum(A3, n);
+    int run5 = RunNumber(A3, n);
+    cout << "Sum: " << sum5 << ", Run: " << run5 << "\n";
 }  
