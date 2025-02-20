@@ -199,7 +199,14 @@ int main() {
     ShakerSort(A, n);
     cout << "\nSorted ascending massive with optimisation: ";
     PrintMas(A, n);
-    ShakerSort(A3, n);
+    int sum4 = CheckSum(A, n);
+    int run4 = RunNumber(A, n);
+    cout << "Sum: " << sum4 << ", Run: " << run4 << "\n";
+    BubbleSort(A3, n);
     cout << "\nSorted random massive with optimisation: ";
     PrintMas(A3, n);
+    int sum5 = CheckSum(A3, n);
+    int run5 = RunNumber(A3, n);
+    cout << "Sum: " << sum5 << ", Run: " << run5 << "\n";
+
 }  
