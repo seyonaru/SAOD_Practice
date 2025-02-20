@@ -97,6 +97,36 @@ void BubbleSort(int A[], int N) {
     cout << "\nC: " << C << ", M: " << M;
 }
 
+//ShakerSort
+void ShakerSort(int A[], int N) {
+    int L = 1;
+    int R = N;
+    int C = 0;
+    int M = 0;
+    int k = N;
+    while (L < R) {
+        for (int j = R; j > L; j--) {
+            C++;
+            if (A[j] < A[j - 1]) {
+                M += 3;
+                swap(A[j], A[j - 1]);
+                k = j;
+            }
+        }
+        L = k;
+        for (int j = L; j < R - 2; j++) {
+            C++;
+            if (A[j] > A[j + 1]) {
+                M += 3;
+                swap(A[j], A[j + 1]);
+                k = j;
+            }
+        }
+        R = k;
+    }
+    cout << "\nC: " << C << ", M: " << M << ", C + M = " << C + M << "\n";
+}
+
 int main() {
     srand(time(0));
     const int n = 500;
