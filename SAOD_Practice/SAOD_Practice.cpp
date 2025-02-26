@@ -99,13 +99,13 @@ void BubbleSort(int A[], int N) {
 
 //ShakerSort
 void ShakerSort(int A[], int N) {
-    int L = 1;
+    int L = 0;
     int R = N - 1;
     int C = 0;
     int M = 0;
     int k = N;
     while (L < R) {
-        for (int j = R; j > L - 1; j--) {
+        for (int j = R; j > L; j--) {
             C++;
             if (A[j] < A[j - 1]) {
                 M += 3;
@@ -129,7 +129,7 @@ void ShakerSort(int A[], int N) {
 
 int main() {
     srand(time(0));
-    const int n = 10;
+    const int n = 500;
     int A[n];
     FillInc(A, n);
     PrintMas(A, n);
