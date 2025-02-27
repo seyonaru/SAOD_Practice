@@ -16,7 +16,7 @@ void FillDec(int A[], int N) {
 }
 void FillRand(int A[], int N) {
     for (int i = 0; i < N; i++) {
-        A[i] = rand() % 100; 
+        A[i] = rand() % 1000; 
     }
 }
 int CheckSum(int A[], int N) {
@@ -129,7 +129,7 @@ void ShakerSort(int A[], int N) {
 
 int main() {
     srand(time(0));
-    const int n = 500;
+    const int n = 10;
     int A[n];
     FillInc(A, n);
     PrintMas(A, n);
@@ -139,8 +139,8 @@ int main() {
     int A2[n];
     FillDec(A2, n);
     PrintMas(A2, n);
-    int sum2 = CheckSum(A, n);
-    int run2 = RunNumber(A, n);
+    int sum2 = CheckSum(A2, n);
+    int run2 = RunNumber(A2, n);
     cout << "Sum: " << sum2 << ", Run: " << run2 << "\n";
     int A3[n];
     FillRand(A3, n);
