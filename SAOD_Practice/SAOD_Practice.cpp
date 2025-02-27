@@ -127,9 +127,28 @@ void ShakerSort(int A[], int N) {
     cout << "\nC: " << C << ", M: " << M << ", C + M = " << C + M << "\n";
 }
 
+void InsertSort(int A[], int N) {
+    int C = 0;
+    int M = 0;
+    int temp;
+    for (int i = 1; i < N; i++) {
+        temp = A[i];
+        int j = i - 1;
+        while ((j >= 0) && (temp < A[j])) {
+            C++;
+            M++;
+            A[j + 1] = A[j];
+            j--;
+        }
+        M++;
+        A[j + 1] = temp;
+    }
+
+    cout << "\nC: " << C << ", M: " << M << ", C + M = " << C + M;
+}
 int main() {
     srand(time(0));
-    const int n = 10;
+    const int n = 100;
     int A[n];
     FillInc(A, n);
     PrintMas(A, n);
@@ -193,6 +212,7 @@ int main() {
     //PrintMas(A3, n);
 
     //ShakerSort
+    /*
     ShakerSort(A2, n);
     cout << "\nSorted descending massive with optimisation: ";
     PrintMas(A2, n);
@@ -206,6 +226,27 @@ int main() {
     int run4 = RunNumber(A, n);
     cout << "Sum: " << sum4 << ", Run: " << run4 << "\n";
     ShakerSort(A3, n);
+    cout << "\nSorted random massive with optimisation: ";
+    PrintMas(A3, n);
+    int sum5 = CheckSum(A3, n);
+    int run5 = RunNumber(A3, n);
+    cout << "Sum: " << sum5 << ", Run: " << run5 << "\n";
+    */
+
+    //InsertSort
+    InsertSort(A2, n);
+    cout << "\nSorted descending massive with optimisation: ";
+    PrintMas(A2, n);
+    int sum1 = CheckSum(A2, n);
+    int run1 = RunNumber(A2, n);
+    cout << "Sum: " << sum1 << ", Run: " << run1 << "\n";
+    InsertSort(A, n);
+    cout << "\nSorted ascending massive with optimisation: ";
+    PrintMas(A, n);
+    int sum4 = CheckSum(A, n);
+    int run4 = RunNumber(A, n);
+    cout << "Sum: " << sum4 << ", Run: " << run4 << "\n";
+    InsertSort(A3, n);
     cout << "\nSorted random massive with optimisation: ";
     PrintMas(A3, n);
     int sum5 = CheckSum(A3, n);
