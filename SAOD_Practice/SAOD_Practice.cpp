@@ -1,6 +1,7 @@
 ﻿#include <iostream>
 #include <ctime>
 #include <cstdlib>
+#include <iomanip>
 
 using namespace std;
 
@@ -131,22 +132,68 @@ void InsertSort(int A[], int N) {
     int C = 0;
     int M = 0;
     int temp;
+    bool check = false;
     for (int i = 1; i < N; i++) {
         temp = A[i];
+        M++;
         int j = i - 1;
         while ((j >= 0) && (temp < A[j])) {
-            C++;
-            M++;
+            check = true;
             A[j + 1] = A[j];
             j--;
+            C++;
+            M++;
         }
+        if (check == false) C++;
         M++;
         A[j + 1] = temp;
     }
 
     cout << "\nC: " << C << ", M: " << M << ", C + M = " << C + M;
 }
+
+void TablePrint(const int wight) {
+    cout << right << setw(3*wight) << "C + M (fact.)" << endl;
+
+    cout << left << setw(wight-8) << "N"
+        << setw(wight) << "C + M (theor.)"
+        << setw(wight) << "Desc."
+        << setw(wight) << "Rand."
+        << setw(wight) << "Asc." << endl;
+    cout << string(4 * wight, '-') << endl;
+
+    cout << left << setw(wight-8) << "100"
+        << setw(wight) << "10098"
+        << setw(wight) << "10098"
+        << setw(wight) << "5367"
+        << setw(wight) << "297" << endl;
+
+    cout << left << setw(wight-8) << "200"
+        << setw(wight) << "40198"
+        << setw(wight) << "40198"
+        << setw(wight) << "18911"
+        << setw(wight) << "597" << endl;
+
+    cout << left << setw(wight-8) << "300"
+        << setw(wight) << "90298"
+        << setw(wight) << "90298"
+        << setw(wight) << "43711"
+        << setw(wight) << "897" << endl;
+
+    cout << left << setw(wight-8) << "400"
+        << setw(wight) << "160398"
+        << setw(wight) << "160398"
+        << setw(wight) << "77158"
+        << setw(wight) << "1197" << endl;
+
+    cout << left << setw(wight-8) << "500"
+        << setw(wight) << "250498"
+        << setw(wight) << "250498"
+        << setw(wight) << "127848"
+        << setw(wight) << "1497" << endl;
+}
 int main() {
+    const int wight = 15;
     srand(time(0));
     const int n = 100;
     int A[n];
@@ -252,4 +299,6 @@ int main() {
     int sum5 = CheckSum(A3, n);
     int run5 = RunNumber(A3, n);
     cout << "Sum: " << sum5 << ", Run: " << run5 << "\n";
+
+    TablePrint(wight);
 }  
