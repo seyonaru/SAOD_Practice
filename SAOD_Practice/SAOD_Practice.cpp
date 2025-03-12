@@ -149,20 +149,24 @@ void InsertSort(int A[], int N) {
 
 //ShellSort
 
-void ShellSort(int A[], int N, int& h, int& m) {
+void ShellSort(int A[], int N, int& h) {
     int C = 0;
     int M = 0;
+    int m = h.size();
+    bool check = false;
     for (int k = h[m - 1]; k >= 1 || m >= 0; m--) {
         for (int i = k; i <= N; k++) {
             M++;
             int temp = A[i];
             int j = i - k;
             while ((j >= 0) && (temp < A[j])) {
+                check = true;
                 C++;
                 M++;
                 A[j + k] = A[j];
                 j -= k;
             }
+            if (check == false) C++;
             M++;
             A[j + k] = temp;
         }
@@ -258,6 +262,7 @@ int main() {
     */
 
     //InsertSort
+    /*
     InsertSort(A2, n);
     cout << "\nSorted descending massive with optimisation: ";
     PrintMas(A2, n);
@@ -276,28 +281,29 @@ int main() {
     int sum5 = CheckSum(A3, n);
     int run5 = RunNumber(A3, n);
     cout << "Sum: " << sum5 << ", Run: " << run5 << "\n";
+    */
 
     //ShellSort 
-    const int m = log(n) - 1;
+    const int m = floor(log(n)) - 1;
     int h[m];
     cout << m;
     h[0] = 1;
     for (int i = 1; i < m; i++) {
         h[i] = 2 * h[i - 1] + 1;
     }
-    ShellSort(A2, n, h, m);
+    ShellSort(A2, n, h);
     cout << "\nSorted descending massive with optimisation: ";
     PrintMas(A2, n);
     int sum1 = CheckSum(A2, n);
     int run1 = RunNumber(A2, n);
     cout << "Sum: " << sum1 << ", Run: " << run1 << "\n";
-    ShellSort(A, n, h, m);
+    ShellSort(A, n, h);
     cout << "\nSorted ascending massive with optimisation: ";
     PrintMas(A, n);
     int sum4 = CheckSum(A, n);
     int run4 = RunNumber(A, n);
     cout << "Sum: " << sum4 << ", Run: " << run4 << "\n";
-    ShellSort(A3, n, h, m);
+    ShellSort(A3, n, h);
     cout << "\nSorted random massive with optimisation: ";
     PrintMas(A3, n);
     int sum5 = CheckSum(A3, n);
