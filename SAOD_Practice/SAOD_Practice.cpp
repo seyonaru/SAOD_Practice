@@ -2,6 +2,7 @@
 #include <ctime>
 #include <cstdlib>
 #include <vector>
+#include <iomanip>
 
 using namespace std;
 
@@ -181,10 +182,85 @@ void ShellSort(int A[], int N, const vector<int>& h) {
     cout << "C: " << C << ", M: " << M << ", C + M = " << C + M;
 }
 
+void TablePrint(const int wight) {
+    cout << right << setw(3 * wight) << "ShellSort Method" << endl;
+
+    cout << left << setw(wight - 8) << "N"
+        << setw(wight) << "h1 ... hm (D.Knut)"
+        << setw(wight) << "Insert M + C (fact.)"
+        << setw(wight) << "Shell M + C (fact.)" << endl;
+    cout << string(4 * wight, '-') << endl;
+
+    cout << left << setw(wight - 8) << "100"
+        << setw(wight) << "1,3,7,15,31"
+        << setw(wight) << "5367"
+        << setw(wight) << "1795" << endl;
+
+    cout << left << setw(wight - 8) << "200"
+        << setw(wight) << "1,3,7,15,31,63"
+        << setw(wight) << "18911"
+        << setw(wight) << "4320" << endl;
+
+    cout << left << setw(wight - 8) << "300"
+        << setw(wight) << "1,3,7,15,31,63,127"
+        << setw(wight) << "43711"
+        << setw(wight) << "7200" << endl;
+
+    cout << left << setw(wight - 8) << "400"
+        << setw(wight) << "1,3,7,15,31,63,127"
+        << setw(wight) << "77158"
+        << setw(wight) << "10262" << endl;
+
+    cout << left << setw(wight - 8) << "500"
+        << setw(wight) << "1,3,7,15,31,63,127"
+        << setw(wight) << "127848"
+        << setw(wight) << "13012" << endl;
+}
+
+void TablePrint2(const int wight) {
+    cout << right << setw(2 * wight) << "C + M (fact.)" << endl;
+
+    cout << left << setw(wight - 8) << "N"
+        << setw(wight) << "Select"
+        << setw(wight) << "Bubble"
+        << setw(wight) << "Shaker"
+        << setw(wight) << "Insert" << endl;
+    cout << string(4 * wight, '-') << endl;
+
+    cout << left << setw(wight - 8) << "100"
+        << setw(wight) << "5247"
+        << setw(wight) << "11455"
+        << setw(wight) << "9995"
+        << setw(wight) << "5367" << endl;
+
+    cout << left << setw(wight - 8) << "200"
+        << setw(wight) << "21597"
+        << setw(wight) << "49428"
+        << setw(wight) << "44872"
+        << setw(wight) << "18911" << endl;
+
+    cout << left << setw(wight - 8) << "300"
+        << setw(wight) << "44547"
+        << setw(wight) << "107471"
+        << setw(wight) << "99876"
+        << setw(wight) << "43711" << endl;
+
+    cout << left << setw(wight - 8) << "400"
+        << setw(wight) << "80697"
+        << setw(wight) << "205226"
+        << setw(wight) << "177708"
+        << setw(wight) << "77158" << endl;
+
+    cout << left << setw(wight - 8) << "500"
+        << setw(wight) << "125847"
+        << setw(wight) << "305559"
+        << setw(wight) << "258822"
+        << setw(wight) << "127848" << endl;
+}
 
 int main() {
-    srand(time(0));
-    const int n = 200;
+    srand(0);
+    const int n = 500;
     int A[n];
     FillInc(A, n);
     PrintMas(A, n);
@@ -321,4 +397,6 @@ int main() {
     int run5 = RunNumber(A3, n);
     cout << "Sum: " << sum5 << ", Run: " << run5 << "\n";
     
+    const int wight = 15;
+    TablePrint(wight);
 }  
