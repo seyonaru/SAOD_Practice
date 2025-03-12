@@ -185,77 +185,35 @@ void ShellSort(int A[], int N, const vector<int>& h) {
 void TablePrint(const int wight) {
     cout << right << setw(3 * wight) << "ShellSort Method" << endl;
 
-    cout << left << setw(wight - 8) << "N"
-        << setw(wight) << "h1 ... hm (D.Knut)"
-        << setw(wight) << "Insert M + C (fact.)"
-        << setw(wight) << "Shell M + C (fact.)" << endl;
-    cout << string(4 * wight, '-') << endl;
+    cout << left << setw(wight - 8) << "N\th1 ... hm (D.Knut)\tInsert M + C (fact.)\tShell M + C (fact.)" << endl;
+    cout << string(5 * wight, '-') << endl;
 
-    cout << left << setw(wight - 8) << "100"
-        << setw(wight) << "1,3,7,15,31"
-        << setw(wight) << "5367"
-        << setw(wight) << "1795" << endl;
+    cout << left << setw(wight - 8) << "100\t1,3,7,15,31\t\t\t 5367\t\t\t1795" << endl;
 
-    cout << left << setw(wight - 8) << "200"
-        << setw(wight) << "1,3,7,15,31,63"
-        << setw(wight) << "18911"
-        << setw(wight) << "4320" << endl;
+    cout << left << setw(wight - 8) << "200\t1,3,7,15,31,63\t\t\t 18911\t\t\t4320" << endl;
 
-    cout << left << setw(wight - 8) << "300"
-        << setw(wight) << "1,3,7,15,31,63,127"
-        << setw(wight) << "43711"
-        << setw(wight) << "7200" << endl;
+    cout << left << setw(wight - 8) << "300\t1,3,7,15,31,63,127\t\t 43711\t\t\t7200" << endl;
 
-    cout << left << setw(wight - 8) << "400"
-        << setw(wight) << "1,3,7,15,31,63,127"
-        << setw(wight) << "77158"
-        << setw(wight) << "10262" << endl;
+    cout << left << setw(wight - 8) << "400\t1,3,7,15,31,63,127\t\t 77158\t\t\t10262" << endl;
 
-    cout << left << setw(wight - 8) << "500"
-        << setw(wight) << "1,3,7,15,31,63,127"
-        << setw(wight) << "127848"
-        << setw(wight) << "13012" << endl;
+    cout << left << setw(wight - 8) << "500\t1,3,7,15,31,63,127\t\t 127848\t\t\t13012" << endl;
 }
 
 void TablePrint2(const int wight) {
-    cout << right << setw(2 * wight) << "C + M (fact.)" << endl;
+    cout << right << setw(4 * wight) << "ShellSort Method" << endl;
 
-    cout << left << setw(wight - 8) << "N"
-        << setw(wight) << "Select"
-        << setw(wight) << "Bubble"
-        << setw(wight) << "Shaker"
-        << setw(wight) << "Insert" << endl;
-    cout << string(4 * wight, '-') << endl;
+    cout << left << setw(wight - 8) << "N\th1 ... hm(D.Knut)\tShell M + C (fact.)\th1 ... hm (M.Ciur)\tShell M + C (fact.)" << endl;
+    cout << string(7 * wight, '-') << endl;
 
-    cout << left << setw(wight - 8) << "100"
-        << setw(wight) << "5247"
-        << setw(wight) << "11455"
-        << setw(wight) << "9995"
-        << setw(wight) << "5367" << endl;
+    cout << left << setw(wight - 8) << "100\t1,2,7,15,31\t\t\t1795\t\t1,4,10,23,57\t\t\t1716" << endl;
 
-    cout << left << setw(wight - 8) << "200"
-        << setw(wight) << "21597"
-        << setw(wight) << "49428"
-        << setw(wight) << "44872"
-        << setw(wight) << "18911" << endl;
+    cout << left << setw(wight - 8) << "200\t1,3,7,15,31,63\t\t\t4320\t\t1,4,10,23,57,132\t\t4210" << endl;
 
-    cout << left << setw(wight - 8) << "300"
-        << setw(wight) << "44547"
-        << setw(wight) << "107471"
-        << setw(wight) << "99876"
-        << setw(wight) << "43711" << endl;
+    cout << left << setw(wight - 8) << "300\t1,3,7,15,31,63,127\t\t7200\t\t1,4,10,23,57,132\t\t6952" << endl;
 
-    cout << left << setw(wight - 8) << "400"
-        << setw(wight) << "80697"
-        << setw(wight) << "205226"
-        << setw(wight) << "177708"
-        << setw(wight) << "77158" << endl;
+    cout << left << setw(wight - 8) << "400\t1,3,7,15,31,63,127\t\t10262\t\t1,4,10,23,57,132,301\t\t9598" << endl;
 
-    cout << left << setw(wight - 8) << "500"
-        << setw(wight) << "125847"
-        << setw(wight) << "305559"
-        << setw(wight) << "258822"
-        << setw(wight) << "127848" << endl;
+    cout << left << setw(wight - 8) << "500\t1,3,7,15,31,63,127\t\t13012\t\t1,4,10,23,57,132,301\t\t12336" << endl;
 }
 
 int main() {
@@ -370,6 +328,11 @@ int main() {
     //ShellSort 
     int m = floor(log2(n)) - 1;
     vector<int> h(m);
+    vector<int> ciur{ 1, 4, 10, 23, 57, 132, 301, 701, 1750 };
+    vector<int> c;
+    for (int i = 0; i < 9; i++) {
+        if (n > ciur[i]) c.push_back(ciur[i]);
+    }
     cout << m;
     for (int i = 0; i < m; i++) {
         if (i == 0) h[i] = 1;
@@ -378,19 +341,19 @@ int main() {
     cout << endl;
     for (int i : h) cout << i << "\t";
     
-    ShellSort(A2, n, h);
+    ShellSort(A2, n, c);
     cout << "\nSorted descending massive: ";
     PrintMas(A2, n);
     int sum1 = CheckSum(A2, n);
     int run1 = RunNumber(A2, n);
     cout << "Sum: " << sum1 << ", Run: " << run1 << "\n";
-    ShellSort(A, n, h);
+    ShellSort(A, n, c);
     cout << "\nSorted ascending massive: ";
     PrintMas(A, n);
     int sum4 = CheckSum(A, n);
     int run4 = RunNumber(A, n);
     cout << "Sum: " << sum4 << ", Run: " << run4 << "\n";
-    ShellSort(A3, n, h);
+    ShellSort(A3, n, c);
     cout << "\nSorted random massive: ";
     PrintMas(A3, n);
     int sum5 = CheckSum(A3, n);
@@ -399,4 +362,6 @@ int main() {
     
     const int wight = 15;
     TablePrint(wight);
+    cout << endl;
+    TablePrint2(wight);
 }  
