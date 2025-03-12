@@ -192,6 +192,48 @@ void TablePrint(const int wight) {
         << setw(wight) << "127848"
         << setw(wight) << "1497" << endl;
 }
+
+void TablePrint2(const int wight) {
+    cout << right << setw(2 * wight) << "C + M (fact.)" << endl;
+
+    cout << left << setw(wight - 8) << "N"
+        << setw(wight) << "Select"
+        << setw(wight) << "Bubble"
+        << setw(wight) << "Shaker"
+        << setw(wight) << "Insert" << endl;
+    cout << string(4 * wight, '-') << endl;
+
+    cout << left << setw(wight - 8) << "100"
+        << setw(wight) << "5247"
+        << setw(wight) << "11455"
+        << setw(wight) << "9995"
+        << setw(wight) << "5367" << endl;
+
+    cout << left << setw(wight - 8) << "200"
+        << setw(wight) << "21597"
+        << setw(wight) << "49428"
+        << setw(wight) << "44872"
+        << setw(wight) << "18911" << endl;
+
+    cout << left << setw(wight - 8) << "300"
+        << setw(wight) << "44547"
+        << setw(wight) << "107471"
+        << setw(wight) << "99876"
+        << setw(wight) << "43711" << endl;
+
+    cout << left << setw(wight - 8) << "400"
+        << setw(wight) << "80697"
+        << setw(wight) << "205226"
+        << setw(wight) << "177708"
+        << setw(wight) << "77158" << endl;
+
+    cout << left << setw(wight - 8) << "500"
+        << setw(wight) << "125847"
+        << setw(wight) << "305559"
+        << setw(wight) << "258822"
+        << setw(wight) << "127848" << endl;
+}
+
 int main() {
     const int wight = 15;
     srand(time(0));
@@ -301,4 +343,7 @@ int main() {
     cout << "Sum: " << sum5 << ", Run: " << run5 << "\n";
 
     TablePrint(wight);
+    cout << endl;
+    TablePrint2(wight);
+
 }  
