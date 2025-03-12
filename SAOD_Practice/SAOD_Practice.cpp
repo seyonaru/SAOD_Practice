@@ -1,6 +1,7 @@
 ﻿#include <iostream>
 #include <ctime>
 #include <cstdlib>
+#include <vector>
 
 using namespace std;
 
@@ -131,15 +132,19 @@ void InsertSort(int A[], int N) {
     int C = 0;
     int M = 0;
     int temp;
+    bool check = false;
     for (int i = 1; i < N; i++) {
         temp = A[i];
+        M++;
         int j = i - 1;
         while ((j >= 0) && (temp < A[j])) {
-            C++;
-            M++;
+            check = true;
             A[j + 1] = A[j];
             j--;
+            C++;
+            M++;
         }
+        if (check == false) C++;
         M++;
         A[j + 1] = temp;
     }
@@ -149,15 +154,16 @@ void InsertSort(int A[], int N) {
 
 //ShellSort
 
-void ShellSort(int A[], int N, int& h) {
+void ShellSort(int A[], int N, const vector<int>& h) {
     int C = 0;
     int M = 0;
     int m = h.size();
-    bool check = false;
-    for (int k = h[m - 1]; k >= 1 || m >= 0; m--) {
-        for (int i = k; i <= N; k++) {
+    for (int t = m - 1; t >= 0; t--) {
+        int k = h[t];
+        for (int i = k; i < N; i++) {
             M++;
             int temp = A[i];
+            bool check = false;
             int j = i - k;
             while ((j >= 0) && (temp < A[j])) {
                 check = true;
@@ -174,9 +180,11 @@ void ShellSort(int A[], int N, int& h) {
 
     cout << "C: " << C << ", M: " << M << ", C + M = " << C + M;
 }
+
+
 int main() {
     srand(time(0));
-    const int n = 100;
+    const int n = 200;
     int A[n];
     FillInc(A, n);
     PrintMas(A, n);
@@ -284,29 +292,33 @@ int main() {
     */
 
     //ShellSort 
-    const int m = floor(log(n)) - 1;
-    int h[m];
+    int m = floor(log2(n)) - 1;
+    vector<int> h(m);
     cout << m;
-    h[0] = 1;
-    for (int i = 1; i < m; i++) {
-        h[i] = 2 * h[i - 1] + 1;
+    for (int i = 0; i < m; i++) {
+        if (i == 0) h[i] = 1;
+        else h[i] = 2 * h[i - 1] + 1;
     }
+    cout << endl;
+    for (int i : h) cout << i << "\t";
+    
     ShellSort(A2, n, h);
-    cout << "\nSorted descending massive with optimisation: ";
+    cout << "\nSorted descending massive: ";
     PrintMas(A2, n);
     int sum1 = CheckSum(A2, n);
     int run1 = RunNumber(A2, n);
     cout << "Sum: " << sum1 << ", Run: " << run1 << "\n";
     ShellSort(A, n, h);
-    cout << "\nSorted ascending massive with optimisation: ";
+    cout << "\nSorted ascending massive: ";
     PrintMas(A, n);
     int sum4 = CheckSum(A, n);
     int run4 = RunNumber(A, n);
     cout << "Sum: " << sum4 << ", Run: " << run4 << "\n";
     ShellSort(A3, n, h);
-    cout << "\nSorted random massive with optimisation: ";
+    cout << "\nSorted random massive: ";
     PrintMas(A3, n);
     int sum5 = CheckSum(A3, n);
     int run5 = RunNumber(A3, n);
     cout << "Sum: " << sum5 << ", Run: " << run5 << "\n";
+    
 }  
