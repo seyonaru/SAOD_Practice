@@ -2,6 +2,7 @@
 #include <ctime>
 #include <cstdlib>
 #include <vector>
+#include <iomanip>
 
 using namespace std;
 
@@ -148,22 +149,18 @@ void InsertSort(int A[], int N) {
     cout << "\nC: " << C << ", M: " << M << ", C + M = " << C + M;
 }
 
-int BinarySearch1(vector<int> A) {
+int BinarySearch1(vector<int> A, int key) {
     int L = 0;
     int R = A.size() - 1;
     int found = -1;
     int C = 0;
-    int key;
-    int middle = 0;
-    cout << "Write down the search key: ";
-    cin >> key;
 
     while (L <= R) {
-        middle = (L + R) / 2;
+        int middle = (L + R) / 2;
         C++;
         if (A[middle] == key) {
-            cout << "\nC: " << C << endl;
-            return middle;
+            //cout << "\nC: " << C << endl;
+            return C;
         }
         else if (A[middle] < key) L = middle + 1;
         else R = middle - 1;
@@ -173,14 +170,11 @@ int BinarySearch1(vector<int> A) {
     return found;
 }
 
-int BinarySearch2(vector<int> A) {
+int BinarySearch2(vector<int> A, int key) {
     int L = 0;
     int R = A.size() - 1;
     int pos = -1;
     int C = 0;
-    int key;
-    cout << "Write down the search key: ";
-    cin >> key;
 
     while (L < R) {
         int middle = (L + R) / 2;
@@ -190,8 +184,8 @@ int BinarySearch2(vector<int> A) {
     }
     C++;
     if (A[R] == key) {
-        cout << "\nC: " << C << endl;
-        return R;
+        //cout << "\nC: " << C << endl;
+        return C;
     }
     cout << "\nC: " << C << endl;
     return pos;
@@ -310,13 +304,18 @@ int main() {
     */
 
     //Binary Search
+    cout << "|   N   | Binary Search 1 | Binary Search 2 |\n";
+    cout << "|-------|-----------------|-----------------|\n";
 
     for (int j = 1; j < 11; j ++) {
+        //int key = rand() / (j * 100);
+        int key = (j * 100);
         vector<int> B;
         for (int i = 0; i < j*100; i++)
             B.push_back(i+1);
-        cout << j << ")";
-        cout << BinarySearch1(B) << endl;
-        cout << BinarySearch2(B) << endl;
+        cout << "|" << setw(7) << j * 100
+            << "|" << setw(17) << BinarySearch1(B, key)
+            << "|" << setw(17) << BinarySearch2(B, key)
+            << "|\n";
     }
 }  
