@@ -1,6 +1,7 @@
 ﻿#include <iostream>
 #include <ctime>
 #include <cstdlib>
+#include <vector>
 
 using namespace std;
 
@@ -146,8 +147,35 @@ void InsertSort(int A[], int N) {
 
     cout << "\nC: " << C << ", M: " << M << ", C + M = " << C + M;
 }
+
+int BinarySearch1(vector<int> A) {
+    int L = 0;
+    int R = A.size() - 1;
+    int found = -1;
+    int C = 0;
+    int key;
+    int middle = 0;
+    cout << "Write down the search key: ";
+    cin >> key;
+
+    while (L <= R) {
+        middle = (L + R) / 2;
+        C++;
+        if (A[middle] == key) {
+            cout << "\nC: " << C << endl;
+            return middle;
+        }
+        else if (A[middle] < key) L = middle + 1;
+        else R = middle - 1;
+        C++;
+    }
+    cout << "\nC: " << C << endl;
+    return found;
+}
+
 int main() {
     srand(time(0));
+    /*
     const int n = 100;
     int A[n];
     FillInc(A, n);
@@ -155,6 +183,7 @@ int main() {
     int sum = CheckSum(A, n);
     int run = RunNumber(A, n);
     cout <<"Sum: "<< sum << ", Run: " << run << "\n";
+    
     int A2[n];
     FillDec(A2, n);
     PrintMas(A2, n);
@@ -167,6 +196,7 @@ int main() {
     int sum3 = CheckSum(A3, n);
     int run3 = RunNumber(A3, n);
     cout << "Sum: " << sum3 << ", Run: " << run3 << "\n";
+    */
 
     //SelectSort 
     //SelectSort(A2, n);
@@ -234,6 +264,7 @@ int main() {
     */
 
     //InsertSort
+    /*
     InsertSort(A2, n);
     cout << "\nSorted descending massive with optimisation: ";
     PrintMas(A2, n);
@@ -252,4 +283,15 @@ int main() {
     int sum5 = CheckSum(A3, n);
     int run5 = RunNumber(A3, n);
     cout << "Sum: " << sum5 << ", Run: " << run5 << "\n";
+    */
+
+    //Binary Search
+
+    for (int j = 1; j < 11; j ++) {
+        vector<int> B;
+        for (int i = 0; i < j*100; i++)
+            B.push_back(i+1);
+        cout << j << ")";
+        cout << BinarySearch(B) << endl;
+    }
 }  
