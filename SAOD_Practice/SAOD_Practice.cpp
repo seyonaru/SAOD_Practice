@@ -173,6 +173,30 @@ int BinarySearch1(vector<int> A) {
     return found;
 }
 
+int BinarySearch2(vector<int> A) {
+    int L = 0;
+    int R = A.size() - 1;
+    int pos = -1;
+    int C = 0;
+    int key;
+    cout << "Write down the search key: ";
+    cin >> key;
+
+    while (L < R) {
+        int middle = (L + R) / 2;
+        if (A[middle] < key) L = middle + 1;
+        else R = middle;
+        C++;
+    }
+    C++;
+    if (A[R] == key) {
+        cout << "\nC: " << C << endl;
+        return R;
+    }
+    cout << "\nC: " << C << endl;
+    return pos;
+}
+
 int main() {
     srand(time(0));
     /*
@@ -292,6 +316,7 @@ int main() {
         for (int i = 0; i < j*100; i++)
             B.push_back(i+1);
         cout << j << ")";
-        cout << BinarySearch(B) << endl;
+        cout << BinarySearch1(B) << endl;
+        cout << BinarySearch2(B) << endl;
     }
 }  
