@@ -170,25 +170,21 @@ int BinarySearch1(vector<int> A, int key) {
     return found;
 }
 
-int BinarySearch2(vector<int> A, int key) {
-    int L = 0;
-    int R = A.size() - 1;
-    int pos = -1;
-    int C = 0;
+int BinarySearch2(vector<int> A, int key, int L, int R,int C) {
+    if (L > R) {
+        cout << "\nC: " << C << endl;
+        return -1; 
+    }
 
-    while (L < R) {
-        int middle = (L + R) / 2;
-        if (A[middle] < key) L = middle + 1;
-        else R = middle;
-        C++;
-    }
+    int middle = floor((L + R) / 2);
     C++;
-    if (A[R] == key) {
-        //cout << "\nC: " << C << endl;
-        return C;
-    }
-    cout << "\nC: " << C << endl;
-    return pos;
+
+    if (A[middle] == key) {
+            //cout << "\nC: " << C << endl;
+            return C;
+        }
+    if(A[middle] < key) return BinarySearch2(A, key, middle + 1, R, C);
+    else return BinarySearch2(A, key, L, middle - 1, C);
 }
 
 int main() {
@@ -310,12 +306,15 @@ int main() {
     for (int j = 1; j < 11; j ++) {
         //int key = rand() / (j * 100);
         int key = (j * 100);
+        int L = 0;
+        int R = j * 100 - 1;
+        int C = 0;
         vector<int> B;
         for (int i = 0; i < j*100; i++)
             B.push_back(i+1);
         cout << "|" << setw(7) << j * 100
             << "|" << setw(17) << BinarySearch1(B, key)
-            << "|" << setw(17) << BinarySearch2(B, key)
+            << "|" << setw(17) << BinarySearch2(B, key, L, R, C)
             << "|\n";
     }
 }  
