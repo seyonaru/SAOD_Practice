@@ -1,6 +1,10 @@
 ﻿#include <iostream>
 #include <ctime>
 #include <cstdlib>
+#include <locale>
+#include <vector>
+
+#include "struct.hpp"
 
 using namespace std;
 
@@ -147,6 +151,8 @@ void InsertSort(int A[], int N) {
     cout << "\nC: " << C << ", M: " << M << ", C + M = " << C + M;
 }
 int main() {
+    setlocale(LC_ALL, "ru_RU.utf8");
+
     srand(time(0));
     const int n = 100;
     int A[n];
@@ -234,6 +240,7 @@ int main() {
     */
 
     //InsertSort
+    /*
     InsertSort(A2, n);
     cout << "\nSorted descending massive with optimisation: ";
     PrintMas(A2, n);
@@ -252,4 +259,113 @@ int main() {
     int sum5 = CheckSum(A3, n);
     int run5 = RunNumber(A3, n);
     cout << "Sum: " << sum5 << ", Run: " << run5 << "\n";
+    */
+
+    //Structures
+
+    S s1{ "Ivanova", "Mariya", "Vladimirovna", "1234567890" };
+    S s2{ "Petrova", "Marina", "Ivanovna", "0123456789" };
+    S s3{ "Sidorov", "Petr", "Vladimirovich", "2345678901" };
+    S s4{ "Sidorov", "Ivan", "Ivanovich", "3456789012"};
+    S arrS[4] = { s1, s2, s3, s4 };
+
+    for (int i = 0; i < 4; i++) {
+        arrS[i].print();
+    }
+    int key;
+    bool asc;
+
+    string ToFind;
+    int res;
+
+    int KEY;
+    cout << "Select part of task:\n 1 - Easy;\n 2 - Hard;\n 3 - Extra\n 4 - Exit.\n";
+    cin >> KEY;
+    switch (KEY) {
+    case 1:
+        InsertSortStruct(arrS, 4);
+
+        for (int i = 0; i < 4; i++) {
+            arrS[i].print();
+        }
+        break;
+    case 2:
+        cout << "Select sorting key: \n 1 - Surname;\n 2 - Name;\n 3 - Second name;\n 4 - Number.\n";
+        cin >> key;
+
+        cout << "Select sorting way:\n 1 - ascending;\n 0 - descending.\n";
+        cin >> asc;
+        InsertSortStruct(arrS, 4, key, asc);
+
+        for (int i = 0; i < 4; i++) {
+            arrS[i].print();
+        }
+        break;
+    case 3:
+        cout << "Select sorting key: \n 1 - Surname;\n 2 - Name;\n 3 - Second name;\n 4 - Number.\n";
+        cin >> key;
+
+        cout << "Select sorting way:\n 1 - ascending;\n 0 - descending.\n";
+        cin >> asc;
+        InsertSortStruct(arrS, 4, key, asc);
+
+        for (int i = 0; i < 4; i++) {
+            arrS[i].print();
+        }
+
+        switch (key){
+        case 1:
+            cout << "\nWrite down surname to search (without spaces!): ";
+            cin >> ToFind;
+            res = BinarySearchStruct(arrS, 4, key, ToFind);
+            if (res != -1) {
+                cout << "\nFound: ";
+                arrS[res].print();
+            }
+            else {
+                cout << "\nCouldn't find the record with surname " << ToFind << ".\n";
+            }
+            break;
+        case 2:
+            cout << "\nWrite down name to search (without spaces!): ";
+            cin >> ToFind;
+            res = BinarySearchStruct(arrS, 4, key, ToFind);
+            if (res != -1) {
+                cout << "\nFound: ";
+                arrS[res].print();
+            }
+            else {
+                cout << "\nCouldn't find the record with name " << ToFind << ".\n";
+            }
+            break;
+        case 3:
+            cout << "\nWrite down second Name to search (without spaces!): ";
+            cin >> ToFind;
+            res = BinarySearchStruct(arrS, 4, key, ToFind);
+            if (res != -1) {
+                cout << "\nFound: ";
+                arrS[res].print();
+            }
+            else {
+                cout << "\nCouldn't find the record with surname" << ToFind << ".\n";
+            }
+            break;
+        case 4:
+            cout << "\nWrite down number to search (without spaces!): ";
+            cin >> ToFind;
+            res = BinarySearchStruct(arrS, 4, key, ToFind);
+            if (res != -1) {
+                cout << "\nFound: ";
+                arrS[res].print();
+            }
+            else {
+                cout << "\nCouldn't find the record with surname" << ToFind << ".\n";
+            }
+            break;
+        }
+        break;
+    case 4:
+        return 0;
+    };
+ 
 }  

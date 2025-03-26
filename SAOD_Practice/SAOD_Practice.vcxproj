@@ -128,6 +128,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="SAOD_Practice.cpp" />
+    <ClCompile Include="struct.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="struct.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
