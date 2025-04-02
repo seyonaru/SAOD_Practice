@@ -370,12 +370,13 @@ int main() {
     */
 
     //Indexation
-    Contact c1 = { "Petr","123123","st.Morskaya, 1","petr123@mail.ru" };
-    Contact c2 = { "Ivan","124564","st.Letnaya,8","ivnn@mail.ru" };
-    Contact c3 = { "Petr","895612","st.Dachnaya,32","mich8@mail.ru" };
-    Contact c4 = { "Marina","257849","st.Bolshaya,59","marissha@mail.ru" };
+    Contact c1 = { "Petr" , "123123" , "st.Morskaya, 1" , "petr123@mail.ru" };
+    Contact c2 = { "Ivan" , "124564" , "st.Letnaya, 8" , "ivnn@mail.ru" };
+    Contact c3 = { "Petr" , "895612" , "st.Dachnaya, 32" , "mich8@mail.ru" };
+    Contact c4 = { "Marina" , "257849" , "st.Bolshaya, 59" , "marissha@mail.ru" };
+    Contact c5 = { "Irina" , "307691" , "st.Morskaya, 13" , "svet123@mail.ru" };
 
-    vector<Contact> contacts = {c1, c2, c3, c4};
+    vector<Contact> contacts = {c1, c2, c3, c4, c5};
 
     vector<int> indexName = IndexCreate(contacts, 1);
     vector<int> indexPhone = IndexCreate(contacts, 0);
@@ -397,4 +398,9 @@ int main() {
     for (int i : indexPhone) cout << i << "\t";
     cout << "\n" << endl;
     
+    vector<int> newIndex(contacts.size());
+    for (int i = 0; i < indexName.size(); i++) newIndex[i] = indexName[i];
+
+    InsertSortStruct(contacts, newIndex, 0);
+    for (int i : newIndex) cout << i << "\t";
 }  

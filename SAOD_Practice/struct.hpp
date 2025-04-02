@@ -55,7 +55,7 @@ struct Contact
 	string email;
 
 	void print() {
-		cout << name << "\t" << phone << "\t" << address << "\t" << email << "\n";
+		cout << name << "\t\t" << phone << "\t\t" << address << "\t\t" << email << "\n";
 	};
 };
 //bool flag resembles will array of structures be sorted by name (1 or true)  or by phone (0 or false) 
