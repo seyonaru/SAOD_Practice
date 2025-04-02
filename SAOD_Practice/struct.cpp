@@ -132,9 +132,9 @@ int BinarySearchStruct(S s[], int size, int key, const string& ToFind) {
 vector<int> IndexCreate(const vector<Contact>&con, bool flag) {
     vector<int> ind(con.size());
     iota(ind.begin(), ind.end(), 0);
-    sort(ind.begin(), ind.end(), [&](int a, int b) {
-        return flag ? con[a].name < con[b].name : con[a].phone < con[b].phone;
-        });
+    //sort(ind.begin(), ind.end(), [&](int a, int b) {
+    //    return flag ? con[a].name < con[b].name : con[a].phone < con[b].phone;
+    //    });
     return ind;
 }
 
@@ -142,5 +142,28 @@ void Print(const vector<Contact>& con, const vector<int>& ind) {
     for (int i : ind) {
         Contact a = con[i];
         cout << a.print();
+    }
+}
+
+bool compare(const Contact& c1, const Contact& c2) {
+    if (c1.name != c2.name) {
+        return c1.name < c2.name;
+    }
+    return c1.phone < c2.phone;
+}
+
+void InsertSortStruct(vector<Contact>& con, vector<int>& ind) {
+    int N = ind.size();
+    int temp;
+
+    for (int i = 1; i < N; i++) {
+        temp = ind[i];
+        int j = i - 1;
+
+        while (j >= 0 && compare(con[temp], con[ind[j]])) {
+            ind[j + 1] = ind[j];
+            j--;
+        }
+        ind[j + 1] = temp;
     }
 }

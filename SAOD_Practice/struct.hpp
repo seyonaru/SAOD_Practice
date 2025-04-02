@@ -60,5 +60,10 @@ struct Contact
 };
 
 vector<int> IndexCreate(const vector<Contact>& con, bool flag);
+void Print(const vector<Contact>& con, const vector<int>& ind);
+
+bool compare(const Contact& c1, const Contact& c2);
+
+void InsertSortStruct(vector<Contact>& con, vector<int>& ind);
 
 #endif
