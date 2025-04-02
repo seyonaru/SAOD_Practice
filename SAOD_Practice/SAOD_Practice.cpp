@@ -3,6 +3,7 @@
 #include <cstdlib>
 #include <locale>
 #include <vector>
+#include <Windows.h>
 
 #include "struct.hpp"
 
@@ -151,7 +152,9 @@ void InsertSort(int A[], int N) {
     cout << "\nC: " << C << ", M: " << M << ", C + M = " << C + M;
 }
 int main() {
-    setlocale(LC_ALL, "ru_RU.utf8");
+    setlocale(LC_ALL, "Russian"); 
+    SetConsoleOutputCP(1251);    
+    SetConsoleCP(1251);
 
     srand(time(0));
     const int n = 100;
@@ -370,11 +373,11 @@ int main() {
     */
 
     //Indexation
-    Contact c1 = { "Petr" , "123123" , "st.Morskaya, 1" , "petr123@mail.ru" };
-    Contact c2 = { "Ivan" , "124564" , "st.Letnaya, 8" , "ivnn@mail.ru" };
-    Contact c3 = { "Petr" , "895612" , "st.Dachnaya, 32" , "mich8@mail.ru" };
-    Contact c4 = { "Marina" , "257849" , "st.Bolshaya, 59" , "marissha@mail.ru" };
-    Contact c5 = { "Irina" , "307691" , "st.Morskaya, 13" , "svet123@mail.ru" };
+    Contact c1 = { "Пётр" , "123123" , "ул. Морская, 1" , "petr123@mail.ru" };
+    Contact c2 = { "Иван" , "124564" , "ул. Летняя, 8" , "ivnn@mail.ru" };
+    Contact c3 = { "Павел" , "895612" , "ул. Дачная, 32" , "mich8@mail.ru" };
+    Contact c4 = { "Марина" , "257849" , "ул. Большая, 59" , "marissha@mail.ru" };
+    Contact c5 = { "Ирина" , "307691" , "ул. Морская, 13" , "svet123@mail.ru" };
 
     vector<Contact> contacts = {c1, c2, c3, c4, c5};
 
@@ -383,18 +386,18 @@ int main() {
 
     for (Contact i : contacts) i.print();
     //before sorting
-    cout << "Index massive for name BS: \t";
+    cout << "Индексный массив имён перед сортировкой: \t";
     for (int i : indexName) cout << i << "\t";
-    cout << "\nIndex massive for phone BS: \t";
+    cout << "\nИндексный массив телефонов перед сортировкой: \t";
     for (int i : indexPhone) cout << i << "\t";
     cout << "\n" << endl;
     
     InsertSortStruct(contacts, indexName, 1);
     InsertSortStruct(contacts, indexPhone, 0);
     //after sorting
-    cout << "Index massive for name AS: \t";
+    cout << "Индексный массив имён после сортировки: \t";
     for (int i : indexName) cout << i << "\t";
-    cout << "\nIndex massive for phone AS: \t";
+    cout << "\nИндексный массив телефонов после сортировки: \t";
     for (int i : indexPhone) cout << i << "\t";
     cout << "\n" << endl;
     
@@ -403,4 +406,35 @@ int main() {
 
     InsertSortStruct(contacts, newIndex, 0);
     for (int i : newIndex) cout << i << "\t";
+
+    int KEY;
+    cout << "\nПо какому ключу ищите?\n1 - имя;\n2 - телефон;\n0 - выход\n";
+    cin >> KEY;
+    string S;
+    int res;
+    switch (KEY)
+    {
+    case 1:
+        cout << "Напишите имя для поиска: ";
+        cin >> S;
+        res = BinarySearchStruct(contacts, indexName, S, KEY);
+        if (res != -1) {
+            cout << "\nНайдена запись с именем '" << S << "': ";
+            contacts[res].print();
+        }
+        else
+            cout << "\nНе удалось найти запись с именем'" << S << "'.\n";
+        break;
+    case 2:
+        cout << "Напишите телефон для поиска: ";
+        cin >> S;
+        res = BinarySearchStruct(contacts, indexPhone, S, KEY);
+        if (res != -1) {
+            cout << "\nНайдена запись с телефоном '" << S << "': ";
+            contacts[res].print();
+        }
+        else
+            cout << "\nНе удалось найти запись с телефоном '" << S << "'.\n";
+        break;
+    };
 }  

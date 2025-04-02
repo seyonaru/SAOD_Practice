@@ -165,3 +165,40 @@ void InsertSortStruct(vector<Contact>& con, vector<int>& ind, bool flag) {
         ind[j + 1] = temp;
     }
 }
+
+int BinarySearchStruct(vector<Contact>& con, vector<int>& ind, const string toFind, int key) {
+    int L = 0;
+    int R = ind.size() - 1;
+    switch (key)
+    {
+    case 1:
+        while (L <= R) {
+            int middle = L + (R - L) / 2;
+            if (con[ind[middle]].name == toFind) {
+                return ind[middle];
+            }
+            if (con[ind[middle]].name > toFind) {
+                R = middle - 1;
+            }
+            else {
+                L = middle + 1;
+            }
+        }
+        break;
+    case 2:
+        while (L <= R) {
+            int middle = L + (R - L) / 2;
+            if (con[ind[middle]].phone == toFind) {
+                return ind[middle];
+            }
+            if (con[ind[middle]].phone > toFind) {
+                R = middle - 1;
+            }
+            else {
+                L = middle + 1;
+            }
+        }
+        break;
+    }
+    return -1;
+}
