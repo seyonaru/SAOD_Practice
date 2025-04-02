@@ -55,15 +55,15 @@ struct Contact
 	string email;
 
 	void print() {
-		cout << name << "\t" << phone << "\t" << address << "\t" << email;
+		cout << name << "\t" << phone << "\t" << address << "\t" << email << "\n";
 	};
 };
-
+//bool flag resembles will array of structures be sorted by name (1 or true)  or by phone (0 or false) 
 vector<int> IndexCreate(const vector<Contact>& con, bool flag);
 void Print(const vector<Contact>& con, const vector<int>& ind);
 
-bool compare(const Contact& c1, const Contact& c2);
+bool compare(const Contact& c1, const Contact& c2, bool flag);
 
-void InsertSortStruct(vector<Contact>& con, vector<int>& ind);
+void InsertSortStruct(vector<Contact>& con, vector<int>& ind, bool flag);
 
 #endif

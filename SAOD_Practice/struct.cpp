@@ -141,18 +141,16 @@ vector<int> IndexCreate(const vector<Contact>&con, bool flag) {
 void Print(const vector<Contact>& con, const vector<int>& ind) {
     for (int i : ind) {
         Contact a = con[i];
-        cout << a.print();
+        a.print();
     }
 }
 
-bool compare(const Contact& c1, const Contact& c2) {
-    if (c1.name != c2.name) {
-        return c1.name < c2.name;
-    }
-    return c1.phone < c2.phone;
+bool compare(const Contact& c1, const Contact& c2, bool flag) {
+    if (!flag) return c1.phone < c2.phone;
+    return c1.name < c2.name;
 }
 
-void InsertSortStruct(vector<Contact>& con, vector<int>& ind) {
+void InsertSortStruct(vector<Contact>& con, vector<int>& ind, bool flag) {
     int N = ind.size();
     int temp;
 
@@ -160,7 +158,7 @@ void InsertSortStruct(vector<Contact>& con, vector<int>& ind) {
         temp = ind[i];
         int j = i - 1;
 
-        while (j >= 0 && compare(con[temp], con[ind[j]])) {
+        while (j >= 0 && compare(con[temp], con[ind[j]], flag)) {
             ind[j + 1] = ind[j];
             j--;
         }

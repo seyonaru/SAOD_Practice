@@ -262,7 +262,7 @@ int main() {
     */
 
     //Structures
-
+    /*
     S s1{ "Ivanova", "Mariya", "Vladimirovna", "1234567890" };
     S s2{ "Petrova", "Marina", "Ivanovna", "0123456789" };
     S s3{ "Sidorov", "Petr", "Vladimirovich", "2345678901" };
@@ -367,12 +367,34 @@ int main() {
     case 4:
         return 0;
     };
- 
+    */
+
     //Indexation
     Contact c1 = { "Petr","123123","st.Morskaya, 1","petr123@mail.ru" };
     Contact c2 = { "Ivan","124564","st.Letnaya,8","ivnn@mail.ru" };
-    Contact c3 = { "Michail","895612","st.Dachnaya,32","mich8@mail.ru" };
+    Contact c3 = { "Petr","895612","st.Dachnaya,32","mich8@mail.ru" };
     Contact c4 = { "Marina","257849","st.Bolshaya,59","marissha@mail.ru" };
 
     vector<Contact> contacts = {c1, c2, c3, c4};
+
+    vector<int> indexName = IndexCreate(contacts, 1);
+    vector<int> indexPhone = IndexCreate(contacts, 0);
+
+    for (Contact i : contacts) i.print();
+    //before sorting
+    cout << "Index massive for name BS: \t";
+    for (int i : indexName) cout << i << "\t";
+    cout << "\nIndex massive for phone BS: \t";
+    for (int i : indexPhone) cout << i << "\t";
+    cout << "\n" << endl;
+    
+    InsertSortStruct(contacts, indexName, 1);
+    InsertSortStruct(contacts, indexPhone, 0);
+    //after sorting
+    cout << "Index massive for name AS: \t";
+    for (int i : indexName) cout << i << "\t";
+    cout << "\nIndex massive for phone AS: \t";
+    for (int i : indexPhone) cout << i << "\t";
+    cout << "\n" << endl;
+    
 }  
