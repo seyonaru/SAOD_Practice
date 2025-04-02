@@ -3,6 +3,9 @@
 
 #include <iostream>
 #include <cstdlib>
+#include <vector>
+#include <numeric>
+#include <algorithm>
 
 using namespace std;
 
@@ -55,4 +58,7 @@ struct Contact
 		cout << name << "\t" << phone << "\t" << address << "\t" << email;
 	};
 };
+
+vector<int> IndexCreate(const vector<Contact>& con, bool flag);
+
 #endif

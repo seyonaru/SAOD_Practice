@@ -126,5 +126,21 @@ int BinarySearchStruct(S s[], int size, int key, const string& ToFind) {
     default:
         break;
     }
-    return - 1;
+    return - 1;   
+}
+//indexation
+vector<int> IndexCreate(const vector<Contact>&con, bool flag) {
+    vector<int> ind(con.size());
+    iota(ind.begin(), ind.end(), 0);
+    sort(ind.begin(), ind.end(), [&](int a, int b) {
+        return flag ? con[a].name < con[b].name : con[a].phone < con[b].phone;
+        });
+    return ind;
+}
+
+void Print(const vector<Contact>& con, const vector<int>& ind) {
+    for (int i : ind) {
+        Contact a = con[i];
+        cout << a.print();
+    }
 }

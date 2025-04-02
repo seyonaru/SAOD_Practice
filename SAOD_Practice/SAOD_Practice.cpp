@@ -368,4 +368,11 @@ int main() {
         return 0;
     };
  
+    //Indexation
+    Contact c1 = { "Petr","123123","st.Morskaya, 1","petr123@mail.ru" };
+    Contact c2 = { "Ivan","124564","st.Letnaya,8","ivnn@mail.ru" };
+    Contact c3 = { "Michail","895612","st.Dachnaya,32","mich8@mail.ru" };
+    Contact c4 = { "Marina","257849","st.Bolshaya,59","marissha@mail.ru" };
+
+    vector<Contact> contacts = {c1, c2, c3, c4};
 }  
