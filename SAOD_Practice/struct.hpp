@@ -41,4 +41,18 @@ bool compare(const S& s1, const S& s2, int key, bool asc);
 
 int BinarySearchStruct(S s[], int size, int key, const string& ToFind);
 
+//indexation
+
+struct Contact
+
+{
+	string name;
+	string phone;
+	string address;
+	string email;
+
+	void print() {
+		cout << name << "\t" << phone << "\t" << address << "\t" << email;
+	};
+};
 #endif
