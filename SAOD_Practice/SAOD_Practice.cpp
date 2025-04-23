@@ -231,13 +231,17 @@ void testHeap(int N) {
 
     for (const string& t : types) {
         vector<int> A = GenArr(N, t);
+        //for (int i : A) cout << i << " ";
+        //cout << endl;
         HeapSort(A);
         cout << left << setw(10) << t
             << setw(10) << CheckSum(A)
             << setw(10) << RunNumber(A)
             << setw(15) << c
-            << setw(15) << c
+            << setw(15) << m
             << setw(15) << c + m << endl;
+        //for (int i : A) cout << i << " ";
+        //cout << endl << endl;
     }
     cout << "---------------------------------------------" << endl;
 }
