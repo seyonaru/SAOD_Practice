@@ -153,7 +153,7 @@ void InsertSort(int A[], int N) {
 
     cout << "\nC: " << C << ", M: " << M << ", C + M = " << C + M;
 }
-//hearsort
+//heapsort
 int CheckSum(const vector<int>& A) {
     int s = 0;
     for (int i : A) s += i;
@@ -236,10 +236,83 @@ void testHeap(int N) {
             << setw(10) << CheckSum(A)
             << setw(10) << RunNumber(A)
             << setw(15) << c
-            << setw(15) << c
+            << setw(15) << m
             << setw(15) << c + m << endl;
     }
     cout << "---------------------------------------------" << endl;
+}
+
+//quicksort
+int maxDepth1 = 0;
+int maxDepth2 = 0;
+
+void QuickSort1(vector<int>& A, int L, int R, int depth) {
+    maxDepth1 = max(maxDepth1, depth);
+    int i = L, j = R;
+    int x = A[L];
+
+    while (i <= j) {
+        while (++c && A[i] < x) i++;
+        while (++c && A[j] > x) j--;
+
+        if (i <= j) {
+            swap(A[i], A[j]);
+            m += 3;
+            i++;
+            j--;
+        }
+    }
+
+    if (L < j) QuickSort1(A, L, j, depth + 1);
+    if (i < R) QuickSort1(A, i, R, depth + 1);
+}
+
+void QuickSort2(vector<int>& A, int L, int R, int depth) {
+    while (L < R) {
+        maxDepth2 = max(maxDepth2, depth);
+        int i = L, j = R;
+        int x = A[L];
+
+        while (i <= j) {
+            while (++c && A[i] < x) i++;
+            while (++c && A[j] > x) j--;
+
+            if (i <= j) {
+                swap(A[i], A[j]);
+                m += 3;
+                i++;
+                j--;
+            }
+        }
+
+        if (j - L < R - i) {
+            if (L < j) QuickSort2(A, L, j, depth + 1);
+            L = i;
+        }
+        else {
+            if (i < R) QuickSort2(A, i, R, depth + 1);
+            R = j;
+        }
+    }
+}
+
+void testQuick(void (*sortFunc)(vector<int>&, int, int, int), string versionName, int n, const string& type) {
+    vector<int> A = GenArr(n, type);
+    c = m = 0;
+
+    if (versionName == "QS1") maxDepth1 = 0;
+    else maxDepth2 = 0;
+
+    sortFunc(A, 0, n - 1, 1);
+
+    cout << versionName << " | " << type << " | N = " << n
+        << " | Cф = " << c << " | Mф = " << m
+        << " | Сумма = " << c + m;
+
+    if (versionName == "QS1") cout << " | Глуб. рек. = " << maxDepth1;
+    else cout << " | Глуб. рек. = " << maxDepth2;
+
+    cout << endl;
 }
 
 int main() {
@@ -247,7 +320,7 @@ int main() {
     SetConsoleOutputCP(1251);    
     SetConsoleCP(1251);
 
-    srand(time(0));
+    srand(0);
     const int n = 100;
     int A[n];
     FillInc(A, n);
@@ -532,11 +605,57 @@ int main() {
     
     */
     //heapsort
+/*
     cout << "Трудоёмкость пирамидальной сортировки (HeapSort)" << endl;
     cout << "------------------------------------------------" << endl;
     
     for (int n = 100; n <= 500; n += 100) {
         testHeap(n);
     }
+    */
 
+    //QuickSort
+    vector<string> types = { "dec", "inc", "rand" };
+
+    for (int n : {100, 200, 300, 400, 500}) {
+        for (const string& t : types) {
+            testQuick(QuickSort1, "QS1", n, t);
+            testQuick(QuickSort2, "QS2", n, t);
+        }
+        cout << "------------------------------------------\n";
+    }
+    cout << endl;
+    cout << " ____________________________________\n";
+    cout << "|      Трудоёмкость метода Хоара     |\n";
+    cout << " ____________________________________\n";
+    cout << "| N    |  Desc.  |  Asc.   |  Rand.  |\n";
+    cout << " ____________________________________\n";
+    cout << "|  100 |  1560   |  1560   |  1605   |\n";
+    cout << " ____________________________________\n";
+    cout << "|  200 |  3620   |  3620   |  3511   |\n";
+    cout << " ____________________________________\n";
+    cout << "|  300 |  5820   |  5820   |  5857   |\n";
+    cout << " ____________________________________\n";
+    cout << "|  400 |  8240   |  8240   |  7749   |\n";
+    cout << " ____________________________________\n";
+    cout << "|  500 |  10120  |  10120  |  10096  |\n";
+    cout << " ____________________________________\n";
+    cout << endl;
+    cout << " __________________________________________________________________\n";
+    cout << "|                         Глубина рекурсии                         |\n";
+    cout << " __________________________________________________________________\n";
+    cout << "|      |       QuickSort1            |         QuickSort2          |\n";
+    cout << " __________________________________________________________________\n";
+    cout << "| N    |  Desc.  |  Asc.   |  Rand.  | Desc.  |  Asc.   |  Rand.   |\n";
+    cout << " __________________________________________________________________\n";
+    cout << "|  100 |    6    |    6    |   16    |   6    |    6    |    4     |\n";
+    cout << " __________________________________________________________________\n";
+    cout << "|  200 |    7    |    7    |   19    |   7    |    7    |    5     |\n";
+    cout << " __________________________________________________________________\n";
+    cout << "|  300 |    8    |    8    |   20    |   8    |    8    |    5     |\n";
+    cout << " __________________________________________________________________\n";
+    cout << "|  400 |    8    |    8    |   19    |   8    |    8    |    5     |\n";
+    cout << " __________________________________________________________________\n";
+    cout << "|  500 |    8    |    8    |   23    |   8    |    8    |    7     |\n";
+    cout << " __________________________________________________________________\n";
 }  
