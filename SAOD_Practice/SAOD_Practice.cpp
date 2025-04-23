@@ -4,6 +4,8 @@
 #include <locale>
 #include <vector>
 #include <Windows.h>
+#include <string>
+#include <iomanip>
 
 #include "struct.hpp"
 
@@ -151,6 +153,95 @@ void InsertSort(int A[], int N) {
 
     cout << "\nC: " << C << ", M: " << M << ", C + M = " << C + M;
 }
+//hearsort
+int CheckSum(const vector<int>& A) {
+    int s = 0;
+    for (int i : A) s += i;
+    return s;
+}
+
+int RunNumber(const vector<int>& A) {
+    int cnt = 1;
+    for (int i = 1; i < A.size(); i++) {
+        if (A[i] < A[i - 1]) cnt++;
+    }
+    return cnt;
+}
+
+vector<int> GenArr(int N, const string& type) {
+    vector<int> A(N);
+    if (type == "rand") for (int& x : A) x = rand() % 1000;
+    else if (type == "asc") for (int i = 0; i < N; i++) A[i] = i + 1;
+    else if (type == "desc") for (int i = 0; i < N; i++) A[i] = N - i;
+    return A;
+}
+
+int c = 0;
+int m = 0; 
+
+void heap(vector<int>& A, int n, int i) {    
+    int l = i;
+    int L = 2 * i;
+    int R = 2 * i + 1;
+    
+    if (L < n) {
+        c++;
+        if (A[L] > A[l]) l = L;
+    }
+    if (R < n) {
+        c++;
+        if (A[R] > A[l]) l = R;
+    }
+    if (l != i) {
+        swap(A[i], A[l]);
+        m += 3;
+        heap(A, n, l);
+    }
+}
+
+void heapBuild(vector<int>& A) {
+    int n = A.size();
+    for (int i = n / 2 - 1; i >= 0; i--) {
+        heap(A, n, i);
+    }
+}
+
+void HeapSort(vector<int>& A) {
+    c = 0;
+    m = 0;
+
+    heapBuild(A);
+
+    for (int i = A.size()-1; i > 0; i--) {
+        swap(A[0], A[i]);
+        m+=3;
+        heap(A, i, 0);
+    }
+}
+
+void testHeap(int N) {
+    string types[] = {"asc", "desc", "rand"};
+    cout << "N = " << N << endl;
+    cout << left << setw(10) << "Тип"
+        << setw(10) << "Сумма"
+        << setw(10) << "Серии"
+        << setw(15) << "Сравнений"
+        << setw(15) << "Пересылок"
+        << setw(15) << "Мф+Сф" << endl;
+
+    for (const string& t : types) {
+        vector<int> A = GenArr(N, t);
+        HeapSort(A);
+        cout << left << setw(10) << t
+            << setw(10) << CheckSum(A)
+            << setw(10) << RunNumber(A)
+            << setw(15) << c
+            << setw(15) << c
+            << setw(15) << c + m << endl;
+    }
+    cout << "---------------------------------------------" << endl;
+}
+
 int main() {
     setlocale(LC_ALL, "Russian"); 
     SetConsoleOutputCP(1251);    
@@ -373,68 +464,79 @@ int main() {
     */
 
     //Indexation
-    Contact c1 = { "Пётр" , "123123" , "ул. Морская, 1" , "petr123@mail.ru" };
-    Contact c2 = { "Иван" , "124564" , "ул. Летняя, 8" , "ivnn@mail.ru" };
-    Contact c3 = { "Павел" , "895612" , "ул. Дачная, 32" , "mich8@mail.ru" };
-    Contact c4 = { "Марина" , "257849" , "ул. Большая, 59" , "marissha@mail.ru" };
-    Contact c5 = { "Ирина" , "307691" , "ул. Морская, 13" , "svet123@mail.ru" };
+    /*
+        Contact c1 = { "Пётр" , "123123" , "ул. Морская, 1" , "petr123@mail.ru" };
+        Contact c2 = { "Иван" , "124564" , "ул. Летняя, 8" , "ivnn@mail.ru" };
+        Contact c3 = { "Павел" , "895612" , "ул. Дачная, 32" , "mich8@mail.ru" };
+        Contact c4 = { "Марина" , "257849" , "ул. Большая, 59" , "marissha@mail.ru" };
+        Contact c5 = { "Ирина" , "307691" , "ул. Морская, 13" , "svet123@mail.ru" };
 
-    vector<Contact> contacts = {c1, c2, c3, c4, c5};
+        vector<Contact> contacts = {c1, c2, c3, c4, c5};
 
-    vector<int> indexName = IndexCreate(contacts, 1);
-    vector<int> indexPhone = IndexCreate(contacts, 0);
+        vector<int> indexName = IndexCreate(contacts, 1);
+        vector<int> indexPhone = IndexCreate(contacts, 0);
 
-    for (Contact i : contacts) i.print();
-    //before sorting
-    cout << "Индексный массив имён перед сортировкой: \t";
-    for (int i : indexName) cout << i << "\t";
-    cout << "\nИндексный массив телефонов перед сортировкой: \t";
-    for (int i : indexPhone) cout << i << "\t";
-    cout << "\n" << endl;
+        for (Contact i : contacts) i.print();
+        //before sorting
+        cout << "Индексный массив имён перед сортировкой: \t";
+        for (int i : indexName) cout << i << "\t";
+        cout << "\nИндексный массив телефонов перед сортировкой: \t";
+        for (int i : indexPhone) cout << i << "\t";
+        cout << "\n" << endl;
     
-    InsertSortStruct(contacts, indexName, 1);
-    InsertSortStruct(contacts, indexPhone, 0);
-    //after sorting
-    cout << "Индексный массив имён после сортировки: \t";
-    for (int i : indexName) cout << i << "\t";
-    cout << "\nИндексный массив телефонов после сортировки: \t";
-    for (int i : indexPhone) cout << i << "\t";
-    cout << "\n" << endl;
+        InsertSortStruct(contacts, indexName, 1);
+        InsertSortStruct(contacts, indexPhone, 0);
+        //after sorting
+        cout << "Индексный массив имён после сортировки: \t";
+        for (int i : indexName) cout << i << "\t";
+        cout << "\nИндексный массив телефонов после сортировки: \t";
+        for (int i : indexPhone) cout << i << "\t";
+        cout << "\n" << endl;
     
-    vector<int> newIndex(contacts.size());
-    for (int i = 0; i < indexName.size(); i++) newIndex[i] = indexName[i];
+        vector<int> newIndex(contacts.size());
+        for (int i = 0; i < indexName.size(); i++) newIndex[i] = indexName[i];
 
-    InsertSortStruct(contacts, newIndex, 0);
-    for (int i : newIndex) cout << i << "\t";
+        InsertSortStruct(contacts, newIndex, 0);
+        for (int i : newIndex) cout << i << "\t";
 
-    int KEY;
-    cout << "\nПо какому ключу ищите?\n1 - имя;\n2 - телефон;\n0 - выход\n";
-    cin >> KEY;
-    string S;
-    int res;
-    switch (KEY)
-    {
-    case 1:
-        cout << "Напишите имя для поиска: ";
-        cin >> S;
-        res = BinarySearchStruct(contacts, indexName, S, KEY);
-        if (res != -1) {
-            cout << "\nНайдена запись с именем '" << S << "': ";
-            contacts[res].print();
-        }
-        else
-            cout << "\nНе удалось найти запись с именем'" << S << "'.\n";
-        break;
-    case 2:
-        cout << "Напишите телефон для поиска: ";
-        cin >> S;
-        res = BinarySearchStruct(contacts, indexPhone, S, KEY);
-        if (res != -1) {
-            cout << "\nНайдена запись с телефоном '" << S << "': ";
-            contacts[res].print();
-        }
-        else
-            cout << "\nНе удалось найти запись с телефоном '" << S << "'.\n";
-        break;
-    };
+        int KEY;
+        cout << "\nПо какому ключу ищите?\n1 - имя;\n2 - телефон;\n0 - выход\n";
+        cin >> KEY;
+        string S;
+        int res;
+        switch (KEY)
+        {
+        case 1:
+            cout << "Напишите имя для поиска: ";
+            cin >> S;
+            res = BinarySearchStruct(contacts, indexName, S, KEY);
+            if (res != -1) {
+                cout << "\nНайдена запись с именем '" << S << "': ";
+                contacts[res].print();
+            }
+            else
+                cout << "\nНе удалось найти запись с именем'" << S << "'.\n";
+            break;
+        case 2:
+            cout << "Напишите телефон для поиска: ";
+            cin >> S;
+            res = BinarySearchStruct(contacts, indexPhone, S, KEY);
+            if (res != -1) {
+                cout << "\nНайдена запись с телефоном '" << S << "': ";
+                contacts[res].print();
+            }
+            else
+                cout << "\nНе удалось найти запись с телефоном '" << S << "'.\n";
+            break;
+        };
+    
+    */
+    //heapsort
+    cout << "Трудоёмкость пирамидальной сортировки (HeapSort)" << endl;
+    cout << "------------------------------------------------" << endl;
+    
+    for (int n = 100; n <= 500; n += 100) {
+        testHeap(n);
+    }
+
 }  
